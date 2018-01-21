@@ -7,14 +7,12 @@
 class Object {
 public:
 	SDL_Texture* sprite;
-	SDL_Texture* sprite2;
 	int worldPosX;
 	int worldPosY;
-	bool selected;
+	int type;
+	float height;
 
-	Object(int, int);
+	Object(int, int, int, float);
 
-	void loadSprite(const char*, SDL_Renderer*);
-	void drawObject(int, int, float, SDL_Renderer*, SDL_Texture*);
-	void checkIfSelected(int, int, int, int, float, SDL_Texture*);
+	void drawObject(int, int, float, SDL_Renderer*);
 };
