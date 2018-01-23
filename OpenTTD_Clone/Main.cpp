@@ -5,6 +5,7 @@
 
 #include "ObjectGroup.h"
 #include "Object.h"
+#include "TrainEngine.h"
 
 SDL_Window* window;
 SDL_Surface* surface;
@@ -43,6 +44,10 @@ int main(int argc, char* argv[]) {
 	ObjectGroup grass;
 	ObjectGroup rails;
 
+	TrainEngine engine1(2.2, 3, 2.2, 1, 0);
+
+	engine1.loadSprites("C:/Users/jovanipavle/Desktop/OpenTTD Clone Resources/Sprites/Engines/Test/Test.bmp", renderer);
+
 	for (int y = 0; y < 5; y++) {
 		for (int x = 0; x < 5; x++) {
 			Object tmp(x, y, 0, 0);
@@ -50,7 +55,7 @@ int main(int argc, char* argv[]) {
 		}
 	}
 
-	Object tmp(3, 3, 0, 1);
+	/*Object tmp(3, 3, 0, 1);
 	grass.objects.push_back(tmp);
 
 	Object tmp2(2, 3, 6, 0.5);
@@ -75,16 +80,18 @@ int main(int argc, char* argv[]) {
 	grass.objects.push_back(tmp8);
 
 	Object tmp9(2, 4, 7, 0.5);
-	grass.objects.push_back(tmp9);
+	grass.objects.push_back(tmp9);*/
 
-	Object t1(1, 3, 2, 0);
-	Object t2(2, 3, 7, 0);
-	Object t3(3, 3, 3, 1);
-	Object t4(3, 2, 8, 0);
-	Object t5(3, 1, 5, 0);
+	Object t1(2, 3, 0, 0);
+	Object t2(1, 3, 2, 0);
+	Object t3(1, 2, 1, 0);
+	Object t4(3, 1, 5, 0);
+	Object t5(3, 3, 3, 0);
 	Object t6(2, 1, 0, 0);
 	Object t7(1, 1, 4, 0);
-	Object t8(1, 2, 1, 0);
+	Object t8(3, 2, 1, 0);
+	Object t9(1, 1, 0, 0);
+	Object t10(0, 1, 0, 0);
 
 	rails.objects.push_back(t1);
 	rails.objects.push_back(t2);
@@ -94,6 +101,8 @@ int main(int argc, char* argv[]) {
 	rails.objects.push_back(t6);
 	rails.objects.push_back(t7);
 	rails.objects.push_back(t8);
+	rails.objects.push_back(t9);
+	rails.objects.push_back(t10);
 
 	rails.loadSprite("C:/Users/jovanipavle/Desktop/OpenTTD Clone Resources/Sprites/Rails/Normal/BMP/Rails.bmp", renderer);
 	grass.loadSprite("C:/Users/jovanipavle/Desktop/OpenTTD Clone Resources/Sprites/Base/BMP/Base.bmp", renderer);
@@ -101,6 +110,8 @@ int main(int argc, char* argv[]) {
 
 	int cooldown = 0;
 	float scale = 2;
+
+	bool space = false;
 
 	/*std::sort(grass.objects.begin(), grass.objects.end(), cmpH);
 
@@ -207,6 +218,9 @@ int main(int argc, char* argv[]) {
 					case SDLK_e:
 						e = true;
 						break;
+					case SDLK_SPACE:
+						space = !space;
+						break;
 				}
 				break;
 			case SDL_KEYUP:
@@ -281,6 +295,11 @@ int main(int argc, char* argv[]) {
 
 		grass.drawSpriteS(camXPos, camYPos, scale, renderer);
 		rails.drawSpriteS(camXPos, camYPos, scale, renderer);
+
+		if(space == true) {
+			engine1.updateEngine(rails.objects);
+		}
+		engine1.drawEngine(camXPos, camYPos, scale, renderer);
 		
 		SDL_RenderPresent(renderer);
 	}

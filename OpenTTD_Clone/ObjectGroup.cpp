@@ -49,6 +49,10 @@ void ObjectGroup::drawSpriteS(int camOffsetX, int camOffsetY, float scale, SDL_R
 			case 13: sX = 128; sY = 384; eX = 128; eY = 128; break;
 			case 14: sX = 256; sY = 384; eX = 128; eY = 128; break;
 			case 15: sX = 384; sY = 384; eX = 128; eY = 128; break;
+			case 16: sX =   0; sY = 512; eX = 128; eY = 128; break;
+			case 17: sX = 128; sY = 512; eX = 128; eY = 128; break;
+			case 18: sX = 256; sY = 512; eX = 128; eY = 128; break;
+			case 19: sX = 384; sY = 512; eX = 128; eY = 128; break;
 		}
 
 		if (xPosition > (-128 / (scale / 2)) && xPosition < (1280 + (128 / (scale / 2))) && yPosition >(-128 / (scale / 2)) && yPosition < (720 + (128 / (scale / 2)))) {
